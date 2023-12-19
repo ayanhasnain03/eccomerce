@@ -1,10 +1,11 @@
 import React, { useEffect, useReducer } from 'react'
 import axios from "axios";
 import logger from 'use-reducer-logger';
-import { Link } from 'react-router-dom';
 import Product from '../components/Product';
 import  Row  from 'react-bootstrap/Row';
 import  Col  from 'react-bootstrap/Col';
+import Loader from '../components/Loading';
+import Error from '../components/Error';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -42,9 +43,9 @@ fetchData()
     <h1>Featured Products</h1>
     <div className="products">
       {
-      loading? <div>Loading</div>
+      loading? <Loader/>
       :
-      error? <div>error</div>
+      error? <div><Error/></div>
       :(
         <Row>
       {products.map((product) => (
