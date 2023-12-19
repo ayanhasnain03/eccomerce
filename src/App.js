@@ -8,6 +8,7 @@ import  Container  from 'react-bootstrap/Container';
 import { useContext } from "react";
 import { Store } from "./Store";
 import Badge from "react-bootstrap/esm/Badge";
+import CartScreen from "./screens/CartScreen";
 export default function App() {
   const { state } = useContext(Store);
   const { cart } = state;
@@ -25,7 +26,7 @@ export default function App() {
                   Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
-                      {cart.cartItems.length}
+                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                     </Badge>
                   )}
                 </Link>
@@ -38,6 +39,7 @@ export default function App() {
         <Routes>
           <Route path='/' element={<HomeScreen/>}/>
           <Route path='/product/:slug' element={<ProductScreen/>}/>
+          <Route path='/cart' element={<CartScreen/>}/>
           </Routes>
           </Container>
         </main>
